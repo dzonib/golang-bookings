@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/dzonib/cool-go/pkg/render"
+	"github.com/dzonib/golang-app-with-templates/pkg/render"
 
-	"github.com/dzonib/cool-go/pkg/config"
+	"github.com/dzonib/golang-app-with-templates/pkg/config"
 
-	"github.com/dzonib/cool-go/pkg/handlers"
+	"github.com/dzonib/golang-app-with-templates/pkg/handlers"
 )
 
 const portNumber = ":8080"

@@ -3,11 +3,11 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/dzonib/cool-go/pkg/models"
+	"github.com/dzonib/golang-app-with-templates/pkg/models"
 
-	"github.com/dzonib/cool-go/pkg/config"
+	"github.com/dzonib/golang-app-with-templates/pkg/config"
 
-	"github.com/dzonib/cool-go/pkg/render"
+	"github.com/dzonib/golang-app-with-templates/pkg/render"
 )
 
 // Repo is the repository used by handlers
@@ -31,7 +31,7 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{})
+	render.Template(w, "home.page.tmpl", &models.TemplateData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
@@ -40,7 +40,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		"test": "Hello bruh",
 	}
 	// send data to template
-	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
+	render.Template(w, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }

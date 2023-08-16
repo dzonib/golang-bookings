@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/dzonib/cool-go/pkg/models"
+	"github.com/dzonib/golang-app-with-templates/pkg/models"
 
-	"github.com/dzonib/cool-go/pkg/config"
+	"github.com/dzonib/golang-app-with-templates/pkg/config"
 )
 
 var app *config.AppConfig
@@ -37,8 +37,8 @@ func InitiateRenderConfig(a *config.AppConfig) {
 //	}
 //}
 
-// RenderTemplate looking teplates, layouts, partials, and make them automatically populate the template cache (more complexed version of caching)
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+// Template looking teplates, layouts, partials, and make them automatically populate the template cache (more complexed version of caching)
+func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 	var err error
