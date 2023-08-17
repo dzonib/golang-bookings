@@ -1,4 +1,4 @@
-package render
+package templates
 
 import (
 	"bytes"
@@ -14,14 +14,14 @@ import (
 
 var app *config.AppConfig
 
-// InitiateRenderConfig sets a config for a template package
-func InitiateRenderConfig(a *config.AppConfig) {
+// InitiatetemplateConfig sets a config for a template package
+func InitiatetemplateConfig(a *config.AppConfig) {
 	app = a
 }
 
-// RenderTemplateTest does not return anything, it writes everything in response writer
+// templateTemplateTest does not return anything, it writes everything in response writer
 // version without caching
-//func RenderTemplateTest(w http.ResponseWriter, tmpl string) {
+//func templateTemplateTest(w http.ResponseWriter, tmpl string) {
 //	// this can be expensive, we are solvingthis issue bellow
 //	parsedTemplate, err := template.ParseFiles("./templates/"+tmpl, "./templates/base.layout.tmpl")
 //
@@ -37,8 +37,12 @@ func InitiateRenderConfig(a *config.AppConfig) {
 //	}
 //}
 
-// Template looking teplates, layouts, partials, and make them automatically populate the template cache (more complexed version of caching)
-func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+	return td
+}
+
+// RenderTemplate looking teplates, layouts, partials, and make them automatically populate the template cache (more complexed version of caching)
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 	var err error
@@ -47,7 +51,7 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 	if app.UseCache {
 		tc = app.TemplateCache
 	} else {
-		tc, err = CreateTemplateCache()
+		tc, err = CreateCache()
 
 		if err != nil {
 			log.Println(err)
@@ -68,6 +72,9 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 	// arbitrary step for better error checking
 	buf := new(bytes.Buffer)
 
+	//useful when we add more logic for passing td to specific templates
+	td = AddDefaultData(td)
+
 	// try to execute and check if it works
 	err = t.Execute(buf, td)
 
@@ -75,7 +82,7 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 		// tells us that error is comming from the map
 		log.Println(err)
 	}
-	// render the template
+	// template the template
 
 	_, err = buf.WriteTo(w)
 
@@ -85,8 +92,8 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 }
 
-func CreateTemplateCache() (map[string]*template.Template, error) {
-	//	myCache := make(map[string]*template.Template)
+func CreateCache() (map[string]*template.Template, error) {
+	//	myCache := make(map[string]*template.RenderTemplate)
 	// same as using make keyword
 	myCache := map[string]*template.Template{}
 
@@ -127,11 +134,11 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 }
 
 // template cache
-//var tc = make(map[string]*template.Template)
+//var tc = make(map[string]*template.RenderTemplate)
 //
-//// RenderTemplateCached version with caching, renders templates and caches them
-//func RenderTemplateCached(w http.ResponseWriter, t string) {
-//	var tmpl *template.Template
+//// templateTemplateCached version with caching, templates templates and caches them
+//func templateTemplateCached(w http.ResponseWriter, t string) {
+//	var tmpl *template.RenderTemplate
 //	var err error
 //
 //	// check if we already have the template in cache

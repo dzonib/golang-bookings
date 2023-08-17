@@ -5,11 +5,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/render"
 
 	"github.com/dzonib/golang-app-with-templates/pkg/config"
-
 	"github.com/dzonib/golang-app-with-templates/pkg/handlers"
+	"github.com/dzonib/golang-app-with-templates/pkg/templates"
 )
 
 const portNumber = ":8080"
@@ -18,7 +17,7 @@ func main() {
 
 	var app config.AppConfig
 
-	tc, err := render.CreateTemplateCache()
+	tc, err := templates.CreateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
 	}
@@ -32,15 +31,22 @@ func main() {
 
 	handlers.NewHandlers(repo)
 
-	render.InitiateRenderConfig(&app)
+	templates.InitiatetemplateConfig(&app)
 
-	http.HandleFunc("/", repo.Home)
-	http.HandleFunc("/about", repo.About)
+	//	http.HandleFunc("/", repo.Home)
+	//	http.HandleFunc("/about", repo.About)
 
-	fmt.Println(fmt.Sprintf("Starting application on port: %s", portNumber))
+	fmt.Println(fmt.Sprintf("starting application on port: %s", portNumber))
 
-	err = http.ListenAndServe(portNumber, nil)
+	//	err = http.ListenAndServe(portNumber, nil)
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: Routes(&app),
+	}
+
+	err = srv.ListenAndServe()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }

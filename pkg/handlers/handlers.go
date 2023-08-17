@@ -7,7 +7,7 @@ import (
 
 	"github.com/dzonib/golang-app-with-templates/pkg/config"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/render"
+	"github.com/dzonib/golang-app-with-templates/pkg/templates"
 )
 
 // Repo is the repository used by handlers
@@ -31,7 +31,7 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.Template(w, "home.page.tmpl", &models.TemplateData{})
+	templates.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
@@ -40,7 +40,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		"test": "Hello bruh",
 	}
 	// send data to template
-	render.Template(w, "about.page.tmpl", &models.TemplateData{
+	templates.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
