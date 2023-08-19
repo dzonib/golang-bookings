@@ -3,11 +3,11 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/models"
+	"github.com/dzonib/golang-bookings/pkg/models"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/config"
+	"github.com/dzonib/golang-bookings/pkg/config"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/templates"
+	"github.com/dzonib/golang-bookings/pkg/templates"
 )
 
 // Repo is the repository used by handlers

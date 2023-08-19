@@ -6,11 +6,11 @@ import (
 
 	"github.com/go-chi/chi/v5/middleware"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/handlers"
+	"github.com/dzonib/golang-bookings/pkg/handlers"
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/config"
+	"github.com/dzonib/golang-bookings/pkg/config"
 )
 
 func Routes(app *config.AppConfig) http.Handler {

@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/models"
+	"github.com/dzonib/golang-bookings/pkg/models"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/config"
+	"github.com/dzonib/golang-bookings/pkg/config"
 )
 
 var app *config.AppConfig

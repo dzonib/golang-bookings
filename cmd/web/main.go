@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dzonib/golang-app-with-templates/pkg/config"
-	"github.com/dzonib/golang-app-with-templates/pkg/handlers"
-	"github.com/dzonib/golang-app-with-templates/pkg/templates"
+	"github.com/dzonib/golang-bookings/pkg/config"
+	"github.com/dzonib/golang-bookings/pkg/handlers"
+	"github.com/dzonib/golang-bookings/pkg/templates"
 )
 
 const portNumber = ":8080"
