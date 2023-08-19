@@ -11,6 +11,15 @@ About
             <p>and some more text!!</p>
 
             <h2>This is from template: {{index .StringMap "test"}}</h2>
+
+
+            <h3>
+                {{if ne (index .StringMap "remoteIP") ""}}
+                    Your IP is:{{index .StringMap "remoteIP"}}
+                {{else}}
+                    Can not find IP, you are hacker
+                {{end}}
+            </h3>
         </div>
     </div>
 </div>

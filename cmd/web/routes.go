@@ -24,6 +24,7 @@ func Routes(app *config.AppConfig) http.Handler {
 
 	r.Use(WriteToConsole)
 	r.Use(NoSurf)
+	r.Use(SessionLoad)
 
 	// Set a timeout value on the request context (ctx), that will signal
 	// through ctx.Done() that the request has timed out and further

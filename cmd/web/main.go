@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"
-
+	"time"
 
 	"github.com/dzonib/golang-app-with-templates/pkg/config"
 	"github.com/dzonib/golang-app-with-templates/pkg/handlers"
@@ -13,9 +14,21 @@ import (
 
 const portNumber = ":8080"
 
-func main() {
+var app config.AppConfig
 
-	var app config.AppConfig
+var sessionManager *scs.SessionManager
+
+func main() {
+	// change this to true when in production
+	app.InProduction = false
+
+	sessionManager = scs.New()
+	sessionManager.Lifetime = 24 * time.Hour
+	sessionManager.Cookie.Persist = true
+	sessionManager.Cookie.SameSite = http.SameSiteLaxMode
+	sessionManager.Cookie.Secure = false // we want this true in prod
+
+	app.Session = sessionManager
 
 	tc, err := templates.CreateCache()
 	if err != nil {
@@ -24,7 +37,7 @@ func main() {
 
 	app.TemplateCache = tc
 
-	// we dont need cache in dev, we want latest page to show always
+	// we don't need to cache in dev, we want latest page to show always
 	app.UseCache = false
 
 	repo := handlers.NewRepo(&app)

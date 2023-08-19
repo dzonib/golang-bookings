@@ -14,6 +14,7 @@ func WriteToConsole(next http.Handler) http.Handler {
 	})
 }
 
+// NoSurf adds CSRF protection on all POST requests
 func NoSurf(next http.Handler) http.Handler {
 	crsfHandler := nosurf.New(next)
 
@@ -25,4 +26,9 @@ func NoSurf(next http.Handler) http.Handler {
 	})
 
 	return crsfHandler
+}
+
+// SessionLoad loads and saves the session on every request
+func SessionLoad(next http.Handler) http.Handler {
+	return sessionManager.LoadAndSave(next)
 }
